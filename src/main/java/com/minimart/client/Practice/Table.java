@@ -1,18 +1,18 @@
 package com.minimart.client.Practice;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import com.minimart.client.restclient.BrandRESTClient;
+import com.minimart.client.restclient.ManufacturerRESTClient;
 import com.minimart.client.views.MMTableView;
 import com.minimart.client.views.pojos.FXManufacturer;
+import com.minimart.model.Brand;
 import com.minimart.model.Manufacturer;
-import com.minimart.model.POSModel;
+
 
 public class Table extends Application {
 
@@ -35,13 +35,16 @@ public class Table extends Application {
 		MMTableView tableView = new MMTableView(FXManufacturer.class, Manufacturer.class);
 		tableView.setPrefSize(root.getWidth(), root.getHeight());
 
-		List<POSModel> manufacturers = new ArrayList<POSModel>();
-		for (int i = 0; i < 5; i++) {
-			Manufacturer manufacturer = new Manufacturer(i, "Manufacturer_" + i);
-			manufacturers.add(manufacturer );
-		}
+//		List<POSModel> manufacturers = new ArrayList<POSModel>();
+		ManufacturerRESTClient restClient = new ManufacturerRESTClient("http://localhost:8080");
+		//List<Manufacturer> manufacturers = restClient.getAllManufacturers();
+		
+		BrandRESTClient brandClient = new BrandRESTClient("http://localhost:8080");
+		Brand brand = brandClient.getBrand(1);
+		System.out.println(brand.toString());
+		
         tableView.setEditable(true);
-		tableView.reloadTable(manufacturers);
+//		tableView.reloadTable(manufacturers);
 		
 		grid.add(tableView, 0, 0);
 	}

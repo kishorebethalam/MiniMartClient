@@ -51,7 +51,7 @@ public class MMTableView extends TableView<FXModel>{
 	}
 	
 	
-	public void reloadTable(List<POSModel> dataItems){
+	public void reloadTable(List<? extends POSModel> dataItems){
 
 		ObservableList<FXModel>  views= FXModel.convertToFXModels(this.fxModalClass, this.posModalClass, dataItems);
 		this.setItems(views);

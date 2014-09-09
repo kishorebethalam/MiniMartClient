@@ -29,7 +29,7 @@ public class FXModel {
 		return fieldNames;
 	}
 	
-	public static ObservableList<FXModel> convertToFXModels(Class<? extends FXModel> viewClass, Class<? extends POSModel> modelClass, List<POSModel> dataItems){
+	public static ObservableList<FXModel> convertToFXModels(Class<? extends FXModel> viewClass, Class<? extends POSModel> modelClass, List<? extends POSModel> dataItems){
 		List<FXModel> views = new ArrayList<FXModel>();
 		for (POSModel model : dataItems) {
 			FXModel view = MMBaseViewFactory.creaetFromDataItem(viewClass, modelClass, model);
