@@ -24,6 +24,7 @@ public class MMBaseViewFactory {
 					baseView = viewClass.cast(ctor.newInstance(model));
 					
 				}catch (Exception exp){
+					System.out.println("Caught an exception" + exp.getMessage());
 					exp.printStackTrace();
 				}
 			}

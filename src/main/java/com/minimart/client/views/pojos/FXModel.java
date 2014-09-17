@@ -6,11 +6,13 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
 
 import com.minimart.client.utils.ReflectionUtil;
+import com.minimart.model.Manufacturer;
 import com.minimart.model.POSModel;
 
-public class FXModel {
+public abstract class FXModel {
 
 	public FXModel() {
 		// TODO Auto-generated constructor stub
@@ -22,6 +24,7 @@ public class FXModel {
 		
 		List<Method> methods = ReflectionUtil.getDeclaredGetters(viewClass);
 		for (Method method : methods) {
+
 			String field = method.getName().replaceAll("get", "");
 			field = field.substring(0, 1).toLowerCase() + field.substring(1);
 			fieldNames.add(field);
@@ -38,4 +41,8 @@ public class FXModel {
 		}
 		return FXCollections.observableList(views);
 	}
+	
+	public abstract List<TableColumn<FXModel, Object>> getColumnsList();
+	public abstract POSModel toPOSModel();
+	
 }
